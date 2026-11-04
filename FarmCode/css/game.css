@@ -1,0 +1,70 @@
+/* ==========================================================
+   game.css — La granja y la interfaz mínima sobre ella
+   ========================================================== */
+#farm-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; image-rendering: pixelated; image-rendering: crisp-edges; outline: none; touch-action: none; background: #3a6b2f; }
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 20; }
+#hud > * { pointer-events: auto; }
+#topbar { position: absolute; top: calc(10px + var(--safe-t)); left: calc(10px + var(--safe-l)); right: calc(10px + var(--safe-r)); display: flex; align-items: center; gap: 10px; pointer-events: none; }
+#topbar > * { pointer-events: auto; }
+.hamburger { width: 50px; height: 50px; margin: 4px; padding: 0; border: 0; background: var(--wood); box-shadow: var(--frame), inset 0 4px 0 rgba(255,255,255,.25), inset 0 -4px 0 rgba(0,0,0,.3); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; transition: transform .1s; }
+.hamburger span { display: block; width: 26px; height: 4px; background: var(--paper); transition: transform .25s steps(4), opacity .2s; }
+.hamburger:hover { background: var(--wood-l); }
+.hamburger:active { transform: translateY(2px); }
+body.menu-open .hamburger span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+body.menu-open .hamburger span:nth-child(2) { opacity: 0; }
+body.menu-open .hamburger span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+.brand { font: 400 12px var(--font-px); color: var(--paper); text-decoration: none; text-shadow: 2px 2px 0 var(--ink), -1px -1px 0 var(--ink), 1px -1px 0 var(--ink), -1px 1px 0 var(--ink); margin: 0 6px; white-space: nowrap; }
+.hud-chip { display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: rgba(43,29,20,.86); color: var(--paper); box-shadow: var(--frame); margin: 4px; font: 800 13px var(--font-body); }
+.hud-chip .lv { font: 400 10px var(--font-px); color: var(--gold); white-space: nowrap; }
+.hud-chip .xpbar { width: 84px; height: 10px; background: #1c130d; box-shadow: 0 0 0 2px #6a4a30; overflow: hidden; }
+.hud-chip .xpbar i { display: block; height: 100%; width: 0; background: linear-gradient(#a6e36e, #6cc767); transition: width .4s; }
+.hud-chip small { font: 700 11px var(--font-body); opacity: .85; min-width: 38px; }
+.coin-chip { margin-left: auto; font-size: 15px; }
+.coin-ico { width: 20px; height: 20px; }
+
+/* Barra de semillas */
+#hotbar { position: absolute; left: 50%; bottom: calc(14px + var(--safe-b)); transform: translateX(-50%); display: flex; gap: 8px; }
+.slot { position: relative; width: 56px; height: 56px; margin: 4px; padding: 0; border: 0; background: rgba(43,29,20,.88); box-shadow: var(--frame); display: grid; place-items: center; }
+.slot.sel { background: #6a4a30; box-shadow: var(--frame), 0 0 0 4px var(--gold); }
+.slot.empty .pxicon { opacity: .35; filter: grayscale(.6); }
+.slot .key { position: absolute; top: 2px; left: 4px; font: 400 8px var(--font-px); color: var(--paper); opacity: .7; }
+.slot .count { position: absolute; right: 4px; bottom: 2px; font: 400 10px var(--font-px); color: #fff; text-shadow: 1px 1px 0 var(--ink); }
+
+/* Aviso de interacción */
+#prompt { position: fixed; z-index: 25; transform: translate(-50%, -100%); display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: rgba(43,29,20,.92); color: var(--paper); box-shadow: var(--frame); font: 800 14px var(--font-body); white-space: nowrap; touch-action: manipulation; animation: bob 1s steps(2) infinite; }
+#prompt .pkey { display: grid; place-items: center; min-width: 24px; height: 24px; background: var(--gold); color: var(--ink); font: 400 11px var(--font-px); box-shadow: 0 0 0 2px var(--ink); }
+@keyframes bob { 50% { margin-top: -3px; } }
+
+/* Textos flotantes y avisos */
+#floaters { position: fixed; inset: 0; pointer-events: none; z-index: 26; overflow: hidden; }
+.floater { position: absolute; transform: translate(-50%, -50%); font: 400 11px var(--font-px); color: #fff; text-shadow: 2px 0 0 var(--ink), -2px 0 0 var(--ink), 0 2px 0 var(--ink), 0 -2px 0 var(--ink); animation: floatup 1.3s steps(10) forwards; white-space: nowrap; }
+.floater.xp { color: #ffe38a; } .floater.good { color: #b8f27a; } .floater.water { color: #9fd8ff; }
+@keyframes floatup { from { opacity: 1; margin-top: 0; } 70% { opacity: 1; } to { opacity: 0; margin-top: -46px; } }
+#toasts { position: fixed; z-index: 60; top: calc(78px + var(--safe-t)); left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; pointer-events: none; width: min(92vw, 460px); }
+.toast { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(43,29,20,.94); color: var(--paper); box-shadow: var(--frame); font: 700 14px var(--font-body); animation: toastin .25s steps(5); }
+.toast.out { opacity: 0; transition: opacity .35s; }
+@keyframes toastin { from { transform: translateY(-14px); opacity: 0; } }
+
+/* Controles táctiles (solo en pantallas táctiles o estrechas) */
+#touch-controls { position: fixed; inset: auto 0 0 0; z-index: 22; pointer-events: none; display: none; padding: 0 calc(14px + var(--safe-r)) calc(16px + var(--safe-b)) calc(14px + var(--safe-l)); justify-content: space-between; align-items: flex-end; }
+#dpad { display: grid; grid-template-columns: repeat(3, 58px); grid-template-rows: repeat(3, 58px); gap: 2px; pointer-events: auto; }
+#dpad button { width: 58px; height: 58px; border: 0; background: rgba(43,29,20,.68); color: var(--paper); font-size: 22px; box-shadow: var(--frame); touch-action: none; margin: 0; }
+#dpad button.down, #btn-act.down { background: rgba(242,177,52,.9); color: var(--ink); }
+#dpad [data-dir=up] { grid-area: 1 / 2; } #dpad [data-dir=left] { grid-area: 2 / 1; } #dpad [data-dir=right] { grid-area: 2 / 3; } #dpad [data-dir=down] { grid-area: 3 / 2; }
+#btn-act { pointer-events: auto; width: 84px; height: 84px; margin: 0 8px 14px 0; border: 0; border-radius: 0; background: rgba(78,139,74,.9); color: #fff; font: 400 24px var(--font-px); box-shadow: var(--frame); touch-action: none; }
+@media (pointer: coarse), (max-width: 760px) {
+    #touch-controls { display: flex; }
+    #hotbar { left: calc(14px + var(--safe-l)); transform: none; top: calc(76px + var(--safe-t)); bottom: auto; gap: 2px; }
+    .slot { width: 48px; height: 48px; }
+    .brand { display: none; }
+    .hud-chip .xpbar { width: 56px; }
+}
+@media (max-width: 480px) { .hud-chip small { display: none; } .hud-chip { padding: 5px 8px; } }
+
+/* Cambio de zona */
+#fade { position: fixed; inset: 0; z-index: 90; background: #14100a; opacity: 0; pointer-events: none; transition: opacity .3s steps(6); }
+#fade.on { opacity: 1; pointer-events: auto; }
+#area-banner { position: fixed; z-index: 55; top: calc(86px + var(--safe-t)); left: 50%; transform: translateX(-50%); padding: 12px 20px; background: rgba(43,29,20,.93); color: var(--paper); box-shadow: var(--frame); font: 400 clamp(10px, 2.4vw, 14px)/1.5 var(--font-px); text-align: center; opacity: 0; pointer-events: none; max-width: 92vw; }
+#area-banner.show { animation: banner 3s steps(20) forwards; }
+@keyframes banner { 0% { opacity: 0; margin-top: -14px; } 12% { opacity: 1; margin-top: 0; } 80% { opacity: 1; } 100% { opacity: 0; } }
+body:not([data-area="farm"]) #hotbar { display: none; }

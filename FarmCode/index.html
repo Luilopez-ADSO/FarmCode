@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="theme-color" content="#3a6b2f">
+    <title>Farm Code</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Press+Start+2P&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/interface.css">
+    <link rel="stylesheet" href="css/learn.css">
+    <link rel="stylesheet" href="css/community.css">
+</head>
+<body>
+    <!-- 1. LA GRANJA: ocupa toda la pantalla -->
+    <canvas id="farm-canvas" tabindex="0"
+        aria-label="Mapa de la granja de Farm Code. Muévete con W A S D o las flechas y pulsa E para interactuar."></canvas>
+
+    <!-- 2. INTERFAZ MÍNIMA SOBRE LA GRANJA -->
+    <div id="hud">
+        <header id="topbar">
+            <button id="menu-toggle" class="hamburger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="side-menu">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="#" id="brand-home" class="brand" aria-label="Volver a la granja">Farm Code</a>
+            <div class="hud-chip" id="hud-level-chip" title="Nivel y experiencia">
+                <span class="lv">Nv <b id="hud-lv">1</b></span>
+                <span class="xpbar"><i id="hud-xpfill"></i></span>
+                <small id="hud-xp">0/50</small>
+            </div>
+            <div class="hud-chip coin-chip" title="Monedas"><img class="pxicon coin-ico" alt="" id="hud-coin-ico"><b id="hud-coins">0</b></div>
+        </header>
+        <div id="hotbar" role="group" aria-label="Semillas"></div>
+    </div>
+    <div id="prompt" class="hidden" role="status">
+        <span id="prompt-key" class="pkey">E</span><span id="prompt-text"></span>
+    </div>
+    <div id="floaters" aria-hidden="true"></div>
+    <div id="area-banner" aria-live="polite"></div>
+    <div id="fade" aria-hidden="true"></div>
+    <div id="toasts" role="status" aria-live="polite"></div>
+
+    <!-- Controles para pantallas táctiles -->
+    <div id="touch-controls" aria-label="Controles táctiles">
+        <div id="dpad">
+            <button type="button" data-dir="up" aria-label="Arriba">▲</button>
+            <button type="button" data-dir="left" aria-label="Izquierda">◀</button>
+            <button type="button" data-dir="right" aria-label="Derecha">▶</button>
+            <button type="button" data-dir="down" aria-label="Abajo">▼</button>
+        </div>
+        <button id="btn-act" type="button" aria-label="Acción">A</button>
+    </div>
+
+    <!-- 3. MENÚ HAMBURGUESA -->
+    <div id="menu-backdrop" class="menu-backdrop"></div>
+    <aside id="side-menu" class="side-menu" aria-hidden="true" aria-label="Menú del juego">
+        <div class="menu-head">
+            <img id="menu-avatar" class="menu-avatar" alt="">
+            <div class="menu-who"><b id="menu-name">Granjero</b><span id="menu-level">Nivel 1</span></div>
+            <button id="menu-close" class="pxbtn small" type="button" aria-label="Cerrar menú">✕</button>
+        </div>
+        <nav id="menu-links" class="menu-links"></nav>
+        <p class="menu-foot">Misiones completadas: <b id="menu-missions-count">0/0</b></p>
+    </aside>
+
+    <!-- 4. PANTALLAS INDEPENDIENTES (se llenan desde js/panels.js) -->
+    <section id="panel-layer" class="panel-layer hidden" aria-hidden="true">
+        <div class="panel-frame" role="dialog" aria-modal="true" aria-labelledby="panel-title">
+            <header class="panel-head">
+                <h1 id="panel-title"></h1>
+                <button id="panel-close" class="pxbtn" type="button">← Volver a la granja</button>
+            </header>
+            <div id="panel-body" class="panel-body"></div>
+        </div>
+    </section>
+
+    <!-- 5. VENTANAS DEL JUEGO (reemplazan a alert / confirm) -->
+    <div id="dialog-layer" class="dialog-layer hidden" aria-hidden="true">
+        <div id="dialog-card" class="dialog-card" role="dialog" aria-modal="true"></div>
+    </div>
+
+    <noscript><p style="position:fixed;inset:0;background:#fff;padding:2rem;z-index:99999">Farm Code necesita JavaScript para funcionar.</p></noscript>
+
+    <!-- Orden importante: cada archivo usa a los anteriores -->
+    <script src="js/storage.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/sprites.js"></script>
+    <script src="js/sprites_areas.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/areas.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/pets.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/farming.js"></script>
+    <script src="js/missions.js"></script>
+    <script src="js/pyinterp.js"></script>
+    <script src="js/python.js"></script>
+    <script src="js/lessons.js"></script>
+    <script src="js/web.js"></script>
+    <script src="js/jsrun.js"></script>
+    <script src="js/lessons_web.js"></script>
+    <script src="js/programming.js"></script>
+    <script src="js/avatar.js"></script>
+    <script src="js/panels.js"></script>
+    <script src="js/community.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

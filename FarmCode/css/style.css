@@ -1,0 +1,57 @@
+/* ==========================================================
+   style.css — Base y componentes "pixel" reutilizables
+   ========================================================== */
+:root {
+    --ink: #2b1d14;
+    --wood: #7a5230; --wood-d: #4a2e1c; --wood-l: #a8773f;
+    --paper: #f6e7c1; --paper-d: #e3cf9f; --paper-l: #fff6dc;
+    --green: #4e8b4a; --green-d: #356b3b; --green-l: #8bd450;
+    --gold: #f2b134; --sky: #5ab0e8; --red: #d9453a;
+    --muted: #7a6650;
+    --font-px: 'Press Start 2P', 'Courier New', monospace;
+    --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --frame: 0 -4px 0 0 var(--ink), 0 4px 0 0 var(--ink), -4px 0 0 0 var(--ink), 4px 0 0 0 var(--ink);
+    --safe-t: env(safe-area-inset-top, 0px); --safe-b: env(safe-area-inset-bottom, 0px);
+    --safe-l: env(safe-area-inset-left, 0px); --safe-r: env(safe-area-inset-right, 0px);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #3a6b2f; }
+body { font-family: var(--font-body); color: var(--ink); -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; overscroll-behavior: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+.hidden { display: none !important; }
+.pxicon { image-rendering: pixelated; image-rendering: crisp-edges; vertical-align: middle; flex: none; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+canvas, img { -webkit-user-drag: none; }
+
+/* Marco pixel genérico */
+.pxframe { background: var(--paper); box-shadow: var(--frame), inset 0 4px 0 rgba(255,255,255,.5), inset 0 -4px 0 rgba(0,0,0,.1); margin: 4px; }
+
+/* Botones */
+.pxbtn {
+    position: relative; margin: 4px; padding: 10px 16px; border: 0; background: var(--paper-d); color: var(--ink);
+    font: 800 15px/1.2 var(--font-body); text-align: center;
+    box-shadow: var(--frame), inset 0 4px 0 rgba(255,255,255,.5), inset 0 -4px 0 rgba(0,0,0,.2);
+    transition: filter .1s, transform .05s;
+}
+.pxbtn:hover:not(:disabled) { filter: brightness(1.08); }
+.pxbtn:active:not(:disabled) { transform: translateY(2px); box-shadow: var(--frame), inset 0 2px 0 rgba(0,0,0,.2); }
+.pxbtn.primary { background: var(--green); color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,.3); }
+.pxbtn.gold { background: var(--gold); }
+.pxbtn.danger { background: var(--red); color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,.3); }
+.pxbtn.small { padding: 6px 10px; font-size: 13px; }
+.pxbtn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Tarjetas, chips y barras */
+.card { background: var(--paper-l); box-shadow: var(--frame), inset 0 -4px 0 rgba(0,0,0,.07); margin: 4px; padding: 14px 16px; }
+.card.dark { background: #3a2a1d; color: var(--paper); }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; background: var(--paper-d); box-shadow: 0 0 0 2px var(--ink); font: 800 12px var(--font-body); margin: 2px 4px 2px 2px; }
+.chip.green { background: #cfe8a8; } .chip.gold { background: #fbe09a; } .chip.gray { background: #d8d2c4; color: #6b6253; }
+.bar { height: 14px; background: #3a2a1d; box-shadow: 0 0 0 2px var(--ink); position: relative; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: linear-gradient(#a6e36e, #6cc767); transition: width .4s; }
+.bar.gold > i { background: linear-gradient(#ffe38a, #f2b134); }
+h2.sect { font: 400 12px/1.5 var(--font-px); margin: 18px 4px 10px; color: var(--wood-d); }
+.muted { color: var(--muted); }
+code, .code { font-family: 'Consolas', 'Courier New', monospace; background: #ead9a8; padding: 1px 5px; font-size: .92em; }
+
+@media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

@@ -1,0 +1,6 @@
+/* ==========================================================
+   community.css — Pantalla de comunidad
+   ========================================================== */
+.community-soon { background: #fff1c9; }
+.profile-card { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.profile-avatar { width: 100px; height: 140px; image-rendering: pixelated; background: #8bd450; box-shadow: 0 0 0 4px var(--ink); object-fit: contain; }
