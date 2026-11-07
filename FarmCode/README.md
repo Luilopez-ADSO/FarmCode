@@ -8,7 +8,7 @@ Desde la granja se camina a **tres zonas que se exploran** (una por lenguaje) y 
 
 **Opción fácil:** abre `index.html` con doble clic (Chrome, Edge, Firefox o Safari).
 
-**Opción recomendada** (por si tu navegador limita archivos locales):
+**Opción recomendada** (por si tu navegador limita archivos locales):-
 
 ```bash
 cd FarmCode
